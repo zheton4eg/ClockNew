@@ -45,6 +45,7 @@
             this.labelTime.Size = new System.Drawing.Size(231, 55);
             this.labelTime.TabIndex = 0;
             this.labelTime.Text = "labelTime";
+            this.labelTime.DoubleClick += new System.EventHandler(this.labelTime_DoubleClick);
             // 
             // timer
             // 
@@ -81,9 +82,11 @@
             this.Controls.Add(this.buttonHideControls);
             this.Controls.Add(this.cbShowDate);
             this.Controls.Add(this.labelTime);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "btnHideControls";
             this.Text = "Clock_PV_319";
+            this.DoubleClick += new System.EventHandler(this.btnHideControls_DoubleClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 

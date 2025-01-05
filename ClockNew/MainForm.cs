@@ -31,7 +31,24 @@ namespace ClockNew
         {
             cbShowDate.Visible = false;
             buttonHideControls.Visible = false;
-            
+            this.TransparencyKey = this.BackColor;
+            this.FormBorderStyle = FormBorderStyle.None;
+            labelTime.BackColor = Color.AliceBlue;
+            //this.ShowInTaskbar = false;
+        }
+
+        private void btnHideControls_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTime_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, "Вы два раза щёлкнули мышью по времени, и теперь Вы управляете временем",
+            "Info",
+            MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
         }
     }
 }

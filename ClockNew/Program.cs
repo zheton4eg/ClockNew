@@ -16,7 +16,7 @@ namespace ClockNew
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new btnHideControls());
+            Application.Run(new MainForm());
         }
     }
 }

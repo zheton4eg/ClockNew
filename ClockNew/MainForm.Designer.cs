@@ -47,6 +47,7 @@
             this.cmColors = new System.Windows.Forms.ToolStripMenuItem();
             this.cmBackColor = new System.Windows.Forms.ToolStripMenuItem();
             this.cmForeColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmShowControls = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,6 +116,7 @@
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmTopmost,
+            this.cmShowControls,
             this.toolStripSeparator1,
             this.cmShowDate,
             this.cmShowWeekDay,
@@ -123,7 +125,7 @@
             this.toolStripSeparator3,
             this.cmExit});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(181, 154);
+            this.contextMenu.Size = new System.Drawing.Size(181, 176);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cmTopmost
@@ -186,12 +188,22 @@
             this.cmBackColor.Name = "cmBackColor";
             this.cmBackColor.Size = new System.Drawing.Size(180, 22);
             this.cmBackColor.Text = "Background color";
+            this.cmBackColor.Click += new System.EventHandler(this.cmBackColor_Click);
             // 
             // cmForeColor
             // 
             this.cmForeColor.Name = "cmForeColor";
             this.cmForeColor.Size = new System.Drawing.Size(180, 22);
             this.cmForeColor.Text = "Foreground color";
+            this.cmForeColor.Click += new System.EventHandler(this.cmForeColor_Click);
+            // 
+            // cmShowControls
+            // 
+            this.cmShowControls.CheckOnClick = true;
+            this.cmShowControls.Name = "cmShowControls";
+            this.cmShowControls.Size = new System.Drawing.Size(180, 22);
+            this.cmShowControls.Text = "Show controls";
+            this.cmShowControls.CheckedChanged += new System.EventHandler(this.cmShowControls_CheckedChanged);
             // 
             // MainForm
             // 
@@ -233,6 +245,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmColors;
         private System.Windows.Forms.ToolStripMenuItem cmBackColor;
         private System.Windows.Forms.ToolStripMenuItem cmForeColor;
+        private System.Windows.Forms.ToolStripMenuItem cmShowControls;
     }
 }
 

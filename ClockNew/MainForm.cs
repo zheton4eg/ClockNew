@@ -16,6 +16,7 @@ namespace ClockNew
         {
             InitializeComponent();
             labelTime.BackColor = Color.AliceBlue;
+            cmShowControls.Checked = true;
 
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 30);
         }
@@ -54,7 +55,9 @@ namespace ClockNew
             //this.FormBorderStyle = FormBorderStyle.None;
             //labelTime.BackColor = Color.AliceBlue;
             //this.ShowInTaskbar = false;
-            SetVisibility(false);
+            SetVisibility(cmShowControls.Checked=false);
+
+            
         }
 
         private void btnHideControls_DoubleClick(object sender, EventArgs e)
@@ -77,8 +80,9 @@ namespace ClockNew
             //this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
             //labelTime.BackColor = Color.AliceBlue;
             //this.ShowInTaskbar = true;
-            SetVisibility(true);
-            
+            //SetVisibility(true);
+            SetVisibility(cmShowControls.Checked = true);
+
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -124,6 +128,27 @@ this.TopMost=cmTopmost.Checked;
                 this.TopMost = true;
                 this.TopMost = false;
             }
+        }
+
+        private void cmShowControls_CheckedChanged(object sender, EventArgs e)
+        {
+SetVisibility(cmShowControls.Checked);
+        }
+
+        private void cmBackColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            dialog.Color=labelTime.BackColor;
+            if(dialog.ShowDialog() == DialogResult.OK)
+                labelTime.BackColor = dialog.Color;
+        }
+
+        private void cmForeColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            dialog.Color = labelTime.ForeColor;
+            if (dialog.ShowDialog() == DialogResult.OK)
+                labelTime.ForeColor = dialog.Color;
         }
     }
 }

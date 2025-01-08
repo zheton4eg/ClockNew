@@ -45,7 +45,13 @@ namespace ClockNew
         }
         private void btnOK_Click(object sender, EventArgs e)
         {
+            cbFonts_SelectedIndexChanged(sender, e);
             Font = labelExample.Font;
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            cbFonts_SelectedIndexChanged(sender, e);
         }
     }
 }

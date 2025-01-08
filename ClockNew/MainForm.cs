@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
-
+using System.IO;
+using System.Diagnostics; 
 namespace ClockNew
 {
     public partial class MainForm : Form
@@ -23,6 +24,7 @@ namespace ClockNew
             cmShowControls.Checked = true;
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 30);
             cmShowConsole.Checked = true;
+           LoadSettings();
             fontDialog=new ChooseFontForm();
         }
         void SetVisibility(bool visible)
@@ -34,6 +36,38 @@ namespace ClockNew
             this.FormBorderStyle =visible? FormBorderStyle.FixedToolWindow: FormBorderStyle.None;
            
             this.ShowInTaskbar = false;
+        }
+        void SaveSettings()
+        {
+            StreamWriter sw = new StreamWriter("Settings.ini");
+            sw.WriteLine($"{cmTopmost.Checked}");
+            sw.WriteLine($"{cmShowControls.Checked}");
+            sw.WriteLine($"{cmShowDate.Checked}");
+            sw.WriteLine($"{cmShowWeekDay.Checked}");
+            sw.WriteLine($"{cmShowConsole.Checked}");         
+            sw.WriteLine($"{labelTime.BackColor.ToArgb()}");
+            sw.WriteLine($"{labelTime.ForeColor.ToArgb()}");
+            sw.WriteLine($"{fontDialog.Filename}");
+            sw.WriteLine($"{labelTime.Font.Size}");
+            sw.Close();
+            Process.Start("notepad", "Settings.ini");
+        }
+        void LoadSettings()
+        {
+            Directory.SetCurrentDirectory("..\\..\\..\\Fonts");
+            StreamReader sr = new StreamReader("Settings.ini");
+            cmTopmost.Checked = bool.Parse(sr.ReadLine());
+            cmShowControls.Checked = bool.Parse(sr.ReadLine());
+            cmShowDate.Checked = bool.Parse(sr.ReadLine());
+            cmShowWeekDay.Checked = bool.Parse(sr.ReadLine());
+            cmShowConsole.Checked = bool.Parse(sr.ReadLine());
+            labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+            labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+            string font_name=sr.ReadLine();
+            int font_size = (int)Convert.ToDouble(sr.ReadLine());
+             sr.Close();
+            fontDialog = new ChooseFontForm(font_name, font_size);
+            labelTime.Font=fontDialog.Font;
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -174,6 +208,10 @@ SetVisibility(cmShowControls.Checked);
             public static extern bool AllocConsole();
             [DllImport("kernel32.dll")]
             public static extern bool FreeConsole();
-        
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
     }
 }

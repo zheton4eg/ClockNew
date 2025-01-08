@@ -81,7 +81,7 @@
             this.toolStripSeparator3,
             this.cmExit});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(181, 220);
+            this.contextMenu.Size = new System.Drawing.Size(156, 198);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cmTopmost
@@ -238,6 +238,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Clock_PV_319";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.DoubleClick += new System.EventHandler(this.btnHideControls_DoubleClick);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);

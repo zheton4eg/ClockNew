@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ClockNew
 {
     public partial class MainForm : Form
     {
+        ChooseFontForm fontDialog =null;
         public MainForm()
         {
             InitializeComponent();
             labelTime.BackColor = Color.AliceBlue;
             cmShowControls.Checked = true;
-
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width, 30);
+            cmShowConsole.Checked = true;
+            fontDialog=new ChooseFontForm();
         }
         void SetVisibility(bool visible)
         {
@@ -150,5 +155,25 @@ SetVisibility(cmShowControls.Checked);
             if (dialog.ShowDialog() == DialogResult.OK)
                 labelTime.ForeColor = dialog.Color;
         }
+
+        private void cmChooseFont_Click(object sender, EventArgs e)
+        {
+           if( fontDialog.ShowDialog()==DialogResult.OK);
+           labelTime.Font = fontDialog.Font;
+        }
+
+        private void cmShowConsole_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as ToolStripMenuItem).Checked)
+
+                AllocConsole();
+            else
+                FreeConsole();
+        }
+            [DllImport("kernel32.dll")]
+            public static extern bool AllocConsole();
+            [DllImport("kernel32.dll")]
+            public static extern bool FreeConsole();
+        
     }
 }
